@@ -1,74 +1,83 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-class InterstitialAdPage extends StatefulWidget {
-  const InterstitialAdPage({Key? key}) : super(key: key);
+class InstertitialAdPage extends StatefulWidget {
+  const InstertitialAdPage({super.key});
 
   @override
-  _InterstitialAdPageState createState() => _InterstitialAdPageState();
+  State<InstertitialAdPage> createState() => _InstertitialAdPageState();
 }
 
-class _InterstitialAdPageState extends State<InterstitialAdPage> {
+class _InstertitialAdPageState extends State<InstertitialAdPage> {
   InterstitialAd? _interstitialAd;
+
+  late BannerAd _bannerAd;
+  bool _isLoaded = false;
+
+  final adUnitId = Platform.isAndroid
+      ? 'ca-app-pub-3940256099942544/6300978111'
+      : 'ca-app-pub-3940256099942544/2934735716';
+
+  void loadAd() {
+    _bannerAd = BannerAd(
+      adUnitId: adUnitId,
+      request: const AdRequest(),
+      size: AdSize.banner,
+      listener: BannerAdListener(
+        onAdLoaded: (ad) {
+          debugPrint('$ad loaded.');
+          setState(() {
+            _isLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, err) {
+          debugPrint('BannerAd failed to load: $err');
+
+          ad.dispose();
+        },
+      ),
+    )..load();
+  }
 
   @override
   void initState() {
     super.initState();
-    loadInterstitial();
+    loadInstertitial();
+    loadAd();
   }
 
-  void loadInterstitial() {
+  void loadInstertitial() {
     var platform = Theme.of(context).platform;
-    String interstitialAdId = platform == TargetPlatform.iOS
-        ? "'ca-app-pub-3940256099942544/1033173712'"
-        : "'ca-app-pub-3940256099942544/4411468910'";
+    String instertitialAdId = platform == TargetPlatform.iOS ? "" : "";
 
     InterstitialAd.load(
-      adUnitId: interstitialAdId,
-      request: const AdRequest(),
-      adLoadCallback: InterstitialAdLoadCallback(
-        onAdLoaded: (ad) {
-          debugPrint('$ad loaded.');
-          _interstitialAd = ad;
-        },
-        onAdFailedToLoad: (LoadAdError error) {
-          debugPrint('InterstitialAd failed to load: $error');
-        },
-      ),
-    );
-  }
+        adUnitId: instertitialAdId,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (ad) {
+            debugPrint('$ad loaded.');
 
-  void showInterstitial() {
-    if (_interstitialAd != null) {
-      _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
-        onAdShowedFullScreenContent: (ad) {},
-        onAdDismissedFullScreenContent: (ad) {
-          ad.dispose();
-          loadInterstitial();
-        },
-        onAdFailedToShowFullScreenContent: (ad, error) {
-          ad.dispose();
-          loadInterstitial();
-        },
-      );
-
-      _interstitialAd!.show();
-    }
+            _interstitialAd = ad;
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            debugPrint('InterstitialAd failed to load: $error');
+          },
+        ));
   }
 
   @override
   Widget build(BuildContext context) {
-    // Your UI widgets go here
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Interstitial Ad Example'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: showInterstitial,
-          child: const Text('Show Interstitial Ad'),
-        ),
-      ),
-    );
+    return _isLoaded
+        ? ColoredBox(
+            color: Colors.transparent,
+            child: SizedBox(
+              height: _bannerAd.size.height.toDouble(),
+              width: _bannerAd.size.width.toDouble(),
+              child: AdWidget(ad: _bannerAd),
+            ),
+          )
+        : const SizedBox.shrink();
   }
 }
