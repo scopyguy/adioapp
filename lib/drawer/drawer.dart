@@ -27,12 +27,12 @@ class MyDrawer extends StatelessWidget {
         ),
         titleTextStyle:
             const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        backgroundColor: const Color.fromARGB(255, 213, 177, 248),
+        backgroundColor: Color.fromARGB(255, 2, 1, 56),
         elevation: 0,
       ),
       backgroundColor: const Color.fromARGB(230, 10, 10, 10),
       drawer: Drawer(
-        backgroundColor: const Color.fromRGBO(1, 190, 210, 1),
+        backgroundColor: Color.fromARGB(255, 101, 105, 13),
         child: ListView(
           scrollDirection: Axis.vertical,
           children: [
@@ -53,7 +53,9 @@ class MyDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.flag),
+              leading: const Icon(
+                Icons.flag,
+              ),
               title: const Text('Ethiopia'),
               onTap: () {
                 const GhanaWeatherScreen();

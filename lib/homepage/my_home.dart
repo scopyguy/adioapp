@@ -60,34 +60,30 @@ class HistoryPage extends StatelessWidget {
         itemCount:
             21, // Replace with the actual number of content sections you have
         itemBuilder: (context, index) {
-          return Column(children: [
-            Container(
-              decoration: BoxDecoration(color: Colors.black38),
-              child: SizedBox(
-                  child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.asset(
+          return Card(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Image.asset(
                   imagePaths[index],
                   scale: 5,
+                  alignment: Alignment.topLeft,
                 ),
-              )),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Column(
-                  children: [
-                    Text(
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
                       imageDescription[index],
+                      style: const TextStyle(
+                          fontFamily: 'lib/assets/fonts/Raleway-Italic.ttf'),
+                      textScaleFactor: 2,
                     ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
-          ]);
+          );
         },
       ),
     );

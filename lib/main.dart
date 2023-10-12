@@ -42,7 +42,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(useMaterial3: true),
+      theme: ThemeData.dark(),
       home: const MyHome(),
       routes: {
         '/nigeriaweatherscreen': (context) => const NigeriaWeatherScreen(),
