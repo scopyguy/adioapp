@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HistoryPage extends StatelessWidget {
-  const HistoryPage({Key? key});
+  const HistoryPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class HistoryPage extends StatelessWidget {
       'lib/assets/images/a.mali.jpeg',
       'lib/assets/images/a.morocco.png',
       'lib/assets/images/a.mozambique.jpeg',
-      'lib/assets/images/a.namibia.png',
+
       'lib/assets/images/a.nigeria.jpeg',
       'lib/assets/images/a.rwanda.png',
       'lib/assets/images/a.south.png',
@@ -31,7 +31,7 @@ class HistoryPage extends StatelessWidget {
       // Add more image file paths here as needed
     ];
     List<String> imageDescription = [
-      "Algeria: Angola is a Southern African nation whose varied terrain encompasses tropical Atlantic beaches,\n a labyrinthine system of rivers and Sub-Saharan desert that extends across the border into Namibia.\n The country's colonial history is reflected in its Portuguese-influenced cuisine and its landmarks including Fortaleza de São Miguel, a fortress built by the Portuguese in 1576 to defend the capital, Luanda.\nCentral or Middle African countries (9) - Angola, Cameroon, Central African Republic, Chad, Congo Republic - Brazzaville, Democratic Republic of Congo.\nCountries commonly included in Southern Africa include Angola, Botswana, the Comoros, Eswatini, Lesotho, Madagascar, Malawi, Mauritius, Mozambique, Namibia\nThe population of the Republic of Angola is around 24.38 million. The nation is located in Southern Africa. Angola is twenty-third largest nation in the world.",
+      "Algeria: Angola is a Southern African nation whose varied terrain encompasses tropical Atlantic beaches,\n a labyrinthine system of rivers and Sub-Saharan desert that extends across the border into Namibia.\n The country's colonial history is reflected in its Portuguese-influenced cuisine and its landmarks including Fortaleza de São Miguel,\n a fortress built by the Portuguese in 1576 to defend the capital, Luanda.\nCentral or Middle African countries (9) - Angola, Cameroon, Central African Republic, Chad, Congo Republic - Brazzaville, Democratic Republic of Congo.\nCountries commonly included in Southern Africa include Angola, Botswana, the Comoros, Eswatini, Lesotho,\n Madagascar, Malawi, Mauritius, Mozambique, Namibia.\nThe population of the Republic of Angola is around 24.38 million. The nation is located in Southern Africa. Angola is twenty-third largest nation in the world.",
       "Angola: Angola is a Southern African nation whose varied terrain encompasses tropical Atlantic beaches,\n a labyrinthine system of rivers and Sub-Saharan desert that extends across the border into Namibia.\n The country's colonial history is reflected in its Portuguese-influenced cuisine and its landmarks including Fortaleza de São Miguel, a fortress built by the Portuguese in 1576 to defend the capital, Luanda.\nCentral or Middle African countries (9) - Angola, Cameroon, Central African Republic, Chad, Congo Republic - Brazzaville, Democratic Republic of Congo, \nCountries commonly included in Southern Africa include Angola, Botswana, the Comoros, Eswatini, Lesotho, Madagascar, Malawi, Mauritius, Mozambique, Namibia, \nThe population of the Republic of Angola is around 24.38 million. The nation is located in Southern Africa. Angola is twenty-third largest nation in the world.",
       "Anzania: Tanzania is an East African country known for its vast wilderness areas.\n They include the plains of Serengeti National Park, a safari mecca populated by the “big five” game (elephant, lion, leopard,\n buffalo, rhino), and Kilimanjaro National Park, home to Africa’s highest mountain. Offshore lie the tropical islands of Zanzibar, with Arabic influences, and Mafia, with a marine park home to whale sharks and coral reefs.\nTanzania is a country in East Africa bordered by Kenya and Uganda on the north, Rwanda, Burundi and the Democratic Republic of the Congo on the west, and Zambia,\nTanzania, Kenya, Uganda, Rwanda, Burundi, Democratic Republic of Congo and South Sudan are members of the East African Community. · Djibouti, Eritrea, Ethiopia,\nTanzania. This African country sees over a million visitors each year, where in only 2019, the number of tourists reached 1.5 million. ",
       "Benin: Benin, a French-speaking West African nation, is a birthplace of the vodun (or “voodoo”) religion and home to the former Dahomey Kingdom from circa 1600–1900. In Abomey, Dahomey's former capital,\n the Historical Museum occupies two royal palaces with bas-reliefs recounting the kingdom’s past and a throne mounted on human skulls. To the north, Pendjari National Park offers safaris with elephants, hippos and lions.\nBenin; Botswana; Burkina Faso; Burundi; Cameroon; Cape Verde; Central African Republic; Chad; Camoros; Democratic Republic of the Congo; Republic of the Congo,\Republic of Benin, Benin, 25 May 1963. Burkina Faso, Burkina Faso, 25 May 1963. Republic of Cabo Verde, Cabo Verde, 18 July 1975. Republic of Côte d'Ivoire,\nWest Africa or Western Africa is the westernmost region of Africa. The United Nations defines Western Africa as the 16 countries of Benin, Burkina Faso etc.",
@@ -56,35 +56,40 @@ class HistoryPage extends StatelessWidget {
 
     return Scaffold(
       body: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount:
-              23, // Replace with the actual number of content sections you have
-          itemBuilder: (context, index) {
-            return Container(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  SizedBox(
-                    height: 240,
-                    width: 100,
-                    child: Image.asset(
-                      imagePaths[index],
+        scrollDirection: Axis.horizontal,
+        itemCount:
+            21, // Replace with the actual number of content sections you have
+        itemBuilder: (context, index) {
+          return Column(children: [
+            Container(
+              decoration: BoxDecoration(color: Colors.black38),
+              child: SizedBox(
+                  child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.asset(
+                  imagePaths[index],
+                  scale: 5,
+                ),
+              )),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Column(
+                  children: [
+                    Text(
+                      imageDescription[index],
                     ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        imageDescription[index],
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.normal),
-                      ),
-                    ),
-                  )
-                ],
+                  ],
+                ),
               ),
-            );
-          }),
+            ),
+          ]);
+        },
+      ),
     );
   }
 }
