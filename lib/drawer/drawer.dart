@@ -18,7 +18,7 @@ class MyDrawer extends StatelessWidget {
     }
 
     return Scaffold(
-      body: HistoryPage(),
+      body: const HistoryPage(),
       appBar: AppBar(
         title: const Center(
           child: Text(
@@ -27,12 +27,12 @@ class MyDrawer extends StatelessWidget {
         ),
         titleTextStyle:
             const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        backgroundColor: Color.fromARGB(255, 2, 1, 56),
+        backgroundColor: const Color.fromARGB(255, 2, 1, 56),
         elevation: 0,
       ),
       backgroundColor: const Color.fromARGB(230, 10, 10, 10),
       drawer: Drawer(
-        backgroundColor: Color.fromARGB(255, 101, 105, 13),
+        backgroundColor: const Color.fromARGB(255, 101, 105, 13),
         child: ListView(
           scrollDirection: Axis.vertical,
           children: [
